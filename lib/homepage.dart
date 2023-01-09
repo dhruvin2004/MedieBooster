@@ -19,65 +19,21 @@ class _HomePageState extends State<HomePage> {
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          title: Text("Intro Page Screen"),
+          title: const Text("Media Booster"),
           actions: [
             IconButton(
                 onPressed: () {
                   setState(() {
                     showDialog(
                       context: context,
-                      builder: (context) => CupertinoAlertDialog(
-                        title: Text("Are you sure for exit?"),
-                        actions: [
-                          GestureDetector(
-
-                            child: Container(
-                                alignment: Alignment.center,
-                                height: 40,
-                                child: Text(
-                                  "Yes",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      inherit: false,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                )),
-                            onTap: (){
-                              setState(() async{
-                                SharedPreferences prefe =
-                                    await SharedPreferences.getInstance();
-                                Global.isLogin = false;
-                                Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
-                              });
-                            },
-                          ),
-                          GestureDetector(
-                            onTap:(){
-                              setState(() {
-                                Navigator.pop(context);
-                              });
-                            },
-                            child: Container(
-                                alignment: Alignment.center,
-                                height: 40,
-                                child: Text(
-                                  "No",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      inherit: false,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                )),
-                          ),
-                        ],
-                      ),
+                      builder: (context) => Dialog(),
                     );
                   });
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.logout,
                   color: Colors.white,
-                ))
+                ),)
           ],
         ),
         body: Container(
@@ -90,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           ),
           child: ListView(
 
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             children: [
               GestureDetector(
                 onTap: (){
@@ -101,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   width: w,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black26,
                           offset: Offset(0, 4),
@@ -114,12 +70,12 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Container(
                         width: 100,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(
                                     "assets/image/StaggeredGrid-300x300.jpg"))),
                       ),
-                      Text(
+                      const Text(
                         "Staggered Grid View",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                       ),
@@ -127,13 +83,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
                 onTap: (){
                   setState(() {
-                    Navigator.push(context,MaterialPageRoute(builder: (context)=> VideoList(),));
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=> const VideoList(),));
                   });
                 },
                 child: Container(
@@ -141,8 +97,8 @@ class _HomePageState extends State<HomePage> {
                   width: w,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
+                      boxShadow:const [
+                         BoxShadow(
                           color: Colors.black26,
                           offset: Offset(0, 4),
                           blurRadius: 20,
@@ -154,11 +110,11 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Container(
                         width: 150,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage("assets/image/videoplyer.gif"))),
                       ),
-                      Text(
+                      const Text(
                         "Video Player",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                       ),
@@ -166,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),GestureDetector(
                 onTap: (){
@@ -179,8 +135,8 @@ class _HomePageState extends State<HomePage> {
                   width: w,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
+                      boxShadow: const[
+                         BoxShadow(
                           color: Colors.black26,
                           offset: Offset(0, 4),
                           blurRadius: 20,
@@ -192,11 +148,11 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Container(
                         width: 120,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage("assets/image/music.gif"))),
                       ),
-                      Text(
+                      const Text(
                         "Music Player",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                       ),
@@ -204,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
             ],
@@ -212,3 +168,79 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 }
+
+class Dialog extends StatefulWidget {
+  const Dialog({Key? key}) : super(key: key);
+
+  @override
+  State<Dialog> createState() => _DialogState();
+}
+
+
+
+class _DialogState extends State<Dialog> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+setState(() {
+
+});
+  }
+
+  void LogOut()async{
+    SharedPreferences prefe =
+    await SharedPreferences.getInstance();
+    Global.isLogin = false;
+    prefe.setBool('loginIs', Global.isLogin);
+    Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return  CupertinoAlertDialog(
+      title: const Text("Are you sure for exit?"),
+      actions: [
+        GestureDetector(
+
+          child: Container(
+            alignment: Alignment.center,
+            height: 40,
+            child: const Text(
+              "Yes",
+              style: TextStyle(
+                  color: Colors.black,
+                  inherit: false,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),),
+          onTap: (){
+            setState(() {
+              LogOut();
+            });
+
+          },
+        ),
+        GestureDetector(
+          onTap:(){
+            setState(() {
+              Navigator.pop(context);
+            });
+          },
+          child: Container(
+            alignment: Alignment.center,
+            height: 40,
+            child: const Text(
+              "No",
+              style: TextStyle(
+                  color: Colors.black,
+                  inherit: false,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),),
+        ),
+      ],
+    );
+  }
+}
+

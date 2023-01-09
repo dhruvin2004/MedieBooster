@@ -18,13 +18,7 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xff122950), Color(0xff4c7fce)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
+
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView(
@@ -44,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 100,
                 ),
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.grey.shade600),
                   controller: Global.EmailController,
                   onChanged: (val) {
                     setState(() {
@@ -59,18 +53,18 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   decoration: InputDecoration(
                     labelText: "Email",
-                    border: OutlineInputBorder(),
                     hintText: "Email",
-                    labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.w500),
                     hintStyle: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w400),
+                        color: Colors.grey.shade600, fontWeight: FontWeight.w400),
                   ),
                 ),
                 SizedBox(
                   height: 25,
                 ),
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.grey.shade600),
                   controller: Global.PasswordController,
                   onChanged: (val) {
                     setState(() {
@@ -88,12 +82,35 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder(),
                     hintText: "Password",
                     hintStyle: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w400),
+                        color: Colors.grey.shade600, fontWeight: FontWeight.w500),
                   ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          showDialog(context: context, builder: (context)=> ForgotPassword(),);
+                        });
+                      },
+                      child: const Text(
+                        'Forgot Password ?',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 100,
                 ),
+
                 Center(
                   child: GestureDetector(
                     onTap: () async {
@@ -144,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'Not a member?',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.grey.shade600),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
@@ -169,6 +186,72 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({Key? key}) : super(key: key);
+
+  @override
+  State<ForgotPassword> createState() => _ForgotPasswordState();
+}
+
+class _ForgotPasswordState extends State<ForgotPassword> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Forgot Password"),
+      content: Container(
+        height: 120,
+        child: Column(
+          children: [
+            TextFormField(
+              controller: Global.passController,
+              onChanged: (val) {
+                setState(() {
+                  Global.password = val;
+                });
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                labelText: "Forgot Password",
+                border: OutlineInputBorder(),
+                hintText: "Forgot Password",
+                hintStyle: TextStyle(
+                    color: Colors.grey, fontWeight: FontWeight.w400),
+              ),
+            ),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                MaterialButton(onPressed: ()async{
+                  SharedPreferences prefe = await SharedPreferences.getInstance();
+                  setState(() {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Password Chane Successfully')));
+                    prefe.setString('password', Global.password);
+                    Navigator.pop(context);
+                  });
+                },child: Text("Save",style: TextStyle(color: Colors.white),),color: Colors.blue,),
+                OutlinedButton(onPressed: (){
+                  setState(() {
+
+                    Navigator.pop(context);
+                  });
+                },child: Text("Cancal",style: TextStyle(color: Colors.black),),),
+              ],
+            )
+          ],
         ),
       ),
     );
