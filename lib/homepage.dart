@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                                 SharedPreferences prefe =
                                     await SharedPreferences.getInstance();
                                 Global.isLogin = false;
-                                Navigator.pushReplacementNamed(context, 'login');
+                                Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
                               });
                             },
                           ),
