@@ -92,19 +92,15 @@ class _gridViewState extends State<gridView> {
                           (e) => StaggeredGridTile.count(
                           crossAxisCellCount: e['exten'],
                           mainAxisCellCount: e['hight'],
-                          child: Container(
-
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                  child: Image.asset(e['img']),
-                                ),
-                                Text(e['name'],style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)
-                              ],
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Image.asset(e['img']),
+                              Text(e['name'],style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)
+                            ],
                           )),
                     ).toList(),
+
                   ],
                 ),
               ],
