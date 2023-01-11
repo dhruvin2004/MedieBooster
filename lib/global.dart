@@ -92,7 +92,7 @@ class Global {
       'height': 1.2,
     },
     {
-      'name': 'Tu Ake DekhLe',
+      'name': 'Tu Ake Dekhle',
       'path': 'assets/mp3/yt5s.com - King - Tu Aake Dekhle _ The Carnival _ The Last Ride _ Prod. by Shahbeatz _ Latest Hit Songs 2020 (128 kbps).mp3',
       'image': 'assets/photo/4.jpg',
       'height': 1.5,
@@ -128,7 +128,7 @@ class Global {
       'height': 1.5,
     },
     {
-      'name': 'Oops',
+      'name': 'Love Me Thoda Aur',
       'path': 'assets/mp3/yt5s.com - Yaariyan Love Me Thoda Aur Full Video Song _ Arijit Singh _ Himansh Kohli, Rakul Preet _ Pritam (128 kbps).mp3',
       'image': 'assets/photo/10.jpg',
       'height': 1.4,

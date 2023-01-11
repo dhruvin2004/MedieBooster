@@ -48,7 +48,7 @@ class _MusicListState extends State<MusicList> {
                     child: GestureDetector(
                       onTap: () {
                         Global.musicIndex = Global.song.indexOf(e);
-                        Navigator.pushNamed(context, 'musiclist');
+                        Navigator.pushNamed(context, 'musiclist',);
                       },
                       child: Container(
                         decoration: BoxDecoration(

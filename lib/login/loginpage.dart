@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: FlutterLogo(
                     size: 180,
                     style: FlutterLogoStyle.stacked,
-                    textColor: Colors.white,
+                    textColor: Colors.black,
                     duration: Duration(seconds: 3),
                   ),
                 ),
